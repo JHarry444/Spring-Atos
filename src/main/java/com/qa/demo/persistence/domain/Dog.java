@@ -24,6 +24,20 @@ public class Dog {
 		super();
 	}
 
+	public Dog(Long id, String breed, int age, String colour, String size) {
+		super();
+		this.id = id;
+		this.breed = breed;
+		this.age = age;
+		this.colour = colour;
+		this.size = size;
+	}
+
+	@Override
+	public String toString() {
+		return "Dog [id=" + id + ", breed=" + breed + ", age=" + age + ", colour=" + colour + ", size=" + size + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}

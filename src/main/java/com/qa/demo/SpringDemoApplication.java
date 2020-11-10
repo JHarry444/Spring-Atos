@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import com.qa.demo.persistence.domain.Dog;
-import com.qa.demo.persistence.repo.DogRepo;
+import com.qa.demo.services.DogService;
 
 @SpringBootApplication
 public class SpringDemoApplication {
@@ -14,8 +14,15 @@ public class SpringDemoApplication {
 		// bean bag
 		ApplicationContext ac = SpringApplication.run(SpringDemoApplication.class, args);
 		// DEMONSTRATIVE PURPOSES ONLY
-		DogRepo repo = ac.getBean(DogRepo.class);
-		repo.save(new Dog());
+		DogService service = ac.getBean(DogService.class);
+
+		service.createDog(new Dog(null, "Shiba Inu", 12, "brown", "M"));
+
+		System.out.println(service.getDogs());
+
+		service.deleteDogById(1L);
+
+		System.out.println(service.getDogs());
 	}
 
 }
