@@ -2,6 +2,8 @@ package com.qa.demo.rest;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,27 +34,34 @@ public class DogController {
 	}
 
 	@PostMapping("/create")
-	public Dog createDog(@RequestBody Dog dog) {
-		return this.service.createDog(dog);
+	public ResponseEntity<Dog> createDog(@RequestBody Dog dog) {
+		return new ResponseEntity<Dog>(this.service.createDog(dog), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/read")
-	public List<Dog> readDogs() {
-		return this.service.getDogs();
+	public ResponseEntity<List<Dog>> readDogs() {
+		return ResponseEntity.ok(this.service.getDogs());
 	}
 
 	@GetMapping("/read/{id}")
-	public Dog readDog(@PathVariable Long id) {
-		return this.service.getDogByID(id);
+	public ResponseEntity<Dog> readDog(@PathVariable Long id) {
+		return ResponseEntity.ok(this.service.getDogByID(id));
 	}
 
 	@PutMapping("/update/{id}")
-	public Dog updateDog(@PathVariable Long id, @RequestBody Dog newData) {
-		return this.service.updateDogById(id, newData);
+	public ResponseEntity<Dog> updateDog(@PathVariable Long id, @RequestBody Dog newData) {
+		return new ResponseEntity<Dog>(this.service.updateDogById(id, newData), HttpStatus.ACCEPTED);
+
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public boolean deleteDog(@PathVariable Long id) {
-		return this.service.deleteDogById(id);
+	public ResponseEntity<?> deleteDog(@PathVariable Long id) {
+		boolean deleted = this.service.deleteDogById(id);
+
+		if (deleted) {
+			return ResponseEntity.ok(deleted);
+		} else {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }
