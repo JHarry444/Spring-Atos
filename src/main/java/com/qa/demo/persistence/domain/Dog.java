@@ -79,4 +79,50 @@ public class Dog {
 		this.size = size;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + age;
+		result = prime * result + ((breed == null) ? 0 : breed.hashCode());
+		result = prime * result + ((colour == null) ? 0 : colour.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((size == null) ? 0 : size.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Dog other = (Dog) obj;
+		if (age != other.age)
+			return false;
+		if (breed == null) {
+			if (other.breed != null)
+				return false;
+		} else if (!breed.equals(other.breed))
+			return false;
+		if (colour == null) {
+			if (other.colour != null)
+				return false;
+		} else if (!colour.equals(other.colour))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (size == null) {
+			if (other.size != null)
+				return false;
+		} else if (!size.equals(other.size))
+			return false;
+		return true;
+	}
+
 }
