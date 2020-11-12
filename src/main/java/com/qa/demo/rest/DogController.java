@@ -48,6 +48,7 @@ public class DogController {
 		return ResponseEntity.ok(this.service.getDogByID(id));
 	}
 
+	// Enum -> enumerated values
 	@PutMapping("/update/{id}")
 	public ResponseEntity<Dog> updateDog(@PathVariable Long id, @RequestBody Dog newData) {
 		return new ResponseEntity<Dog>(this.service.updateDogById(id, newData), HttpStatus.ACCEPTED);
