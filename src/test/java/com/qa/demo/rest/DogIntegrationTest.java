@@ -80,7 +80,7 @@ public class DogIntegrationTest {
 
 		// Using the AssertJ library to compare the two Dog objects - test will fail if objects don't match
 		// Note: 	
-		//	You WILL need an .equals() method for this.
+		//	You WILL need an .equals() method in the class you're testing for this.
 		//	.equals() can be generated using RMB > Source > Generate hashcode() and equals()
 		//	An example of the .equals() method can be found at the bottom of the Dog class
 		//	More info on AssertJ available @ https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html
