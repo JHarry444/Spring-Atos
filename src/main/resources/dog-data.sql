@@ -1,0 +1,1 @@
+insert into dog (age, breed, colour, size) values (6, 'Boxer', 'Brown', 'L');
