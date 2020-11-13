@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,6 +33,7 @@ import com.qa.demo.persistence.domain.Dog;
 // reads in sql files from src/main/resources and executes them BEFORE each test
 @Sql(scripts = { "classpath:dog-schema.sql",
 		"classpath:dog-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+@ActiveProfiles("test")
 public class DogIntegrationTest {
 
 	@Autowired
@@ -74,16 +76,20 @@ public class DogIntegrationTest {
 
 		// Extracts response body as a String (will be a JSON String with this app)
 		String responseBody = result.getResponse().getContentAsString();
-		
+
 		// Uses the ObjectMapper to convert the JSON String back to a Dog
 		Dog actualDog = this.mapper.readValue(responseBody, Dog.class);
 
-		// Using the AssertJ library to compare the two Dog objects - test will fail if objects don't match
-		// Note: 	
-		//	You WILL need an .equals() method in the class you're testing for this.
-		//	.equals() can be generated using RMB > Source > Generate hashcode() and equals()
-		//	An example of the .equals() method can be found at the bottom of the Dog class
-		//	More info on AssertJ available @ https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html
+		// Using the AssertJ library to compare the two Dog objects - test will fail if
+		// objects don't match
+		// Note:
+		// You WILL need an .equals() method in the class you're testing for this.
+		// .equals() can be generated using RMB > Source > Generate hashcode() and
+		// equals()
+		// An example of the .equals() method can be found at the bottom of the Dog
+		// class
+		// More info on AssertJ available @
+		// https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html
 		assertThat(actualDog).isEqualTo(expectedDog);
 	}
 
