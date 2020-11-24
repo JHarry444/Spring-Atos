@@ -3,6 +3,8 @@ package com.qa.demo.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import com.qa.demo.persistence.domain.Dog;
@@ -38,7 +40,7 @@ public class DogService {
 	}
 
 	public Dog updateDogById(Long id, Dog newData) {
-		Dog existing = this.repo.findById(id).get();
+		Dog existing = this.repo.findById(id).orElseThrow(() -> new EntityNotFoundException());
 
 		existing.setAge(newData.getAge());
 		existing.setBreed(newData.getBreed());
