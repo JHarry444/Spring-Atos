@@ -38,6 +38,10 @@ public class DogService {
 	public List<Dog> getDogs() {
 		return this.repo.findAll();
 	}
+	
+	public List<Dog> getDogsByBreed(String breed) {
+		return this.repo.findByBreed(breed);
+	}
 
 	public Dog updateDogById(Long id, Dog newData) {
 		Dog existing = this.repo.findById(id).orElseThrow(() -> new EntityNotFoundException());

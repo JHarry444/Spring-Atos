@@ -38,9 +38,14 @@ public class DogController {
 		return new ResponseEntity<Dog>(this.service.createDog(dog), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/read")
+	@GetMapping("/readAll")
 	public ResponseEntity<List<Dog>> readDogs() {
 		return ResponseEntity.ok(this.service.getDogs());
+	}
+	
+	@GetMapping("/readAll/{breed}")
+	public ResponseEntity<List<Dog>> readDogsByBreed(@PathVariable String breed) {
+		return ResponseEntity.ok(this.service.getDogsByBreed(breed));
 	}
 
 	@GetMapping("/read/{id}")
