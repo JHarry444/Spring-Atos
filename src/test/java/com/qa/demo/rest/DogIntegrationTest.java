@@ -100,7 +100,7 @@ public class DogIntegrationTest {
 		testDogs.add(testDog);
 		String testDogsAsJSON = this.mapper.writeValueAsString(testDogs);
 
-		RequestBuilder request = get("/read");
+		RequestBuilder request = get("/readAll");
 
 		ResultMatcher checkStatus = status().is(200);
 
